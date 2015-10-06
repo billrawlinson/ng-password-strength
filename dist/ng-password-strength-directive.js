@@ -18,10 +18,6 @@ var _ngPasswordStrengthHtmlText = require('./ng-password-strength.html!text');
 
 var _ngPasswordStrengthHtmlText2 = _interopRequireDefault(_ngPasswordStrengthHtmlText);
 
-var _passwordStrengthService = require('./password-strength-service');
-
-var _passwordStrengthService2 = _interopRequireDefault(_passwordStrengthService);
-
 var NgPasswordStrength = (function () {
   function NgPasswordStrength(passwordStrengthService) {
     _classCallCheck(this, NgPasswordStrength);
@@ -32,7 +28,7 @@ var NgPasswordStrength = (function () {
     this.passwordStrengthService = passwordStrengthService;
     this.scope = {
       pwd: '=ngPasswordStrength',
-      value: '=strength',
+      strength: '=strength',
       innerClassPrefix: '@?',
       outerClassPrefix: '@?',
       innerClass: '@?',
@@ -46,9 +42,10 @@ var NgPasswordStrength = (function () {
     key: 'link',
     value: function link(scope) {
       var passwordStrengthService = this.passwordStrengthService;
-      scope.value = scope.value || passwordStrengthService.measureStrength(scope.pwd);
+      scope.strength = scope.strength || passwordStrengthService.measureStrength(scope.pwd);
       scope.innerClassPrefix = scope.innerClassPrefix || '';
       scope.outerClassPrefix = scope.outerClassPrefix || '';
+      scope.width = scope.strength + '%';
 
       var modes = {
         foundation: {
@@ -87,9 +84,9 @@ var NgPasswordStrength = (function () {
       });
 
       scope.$watch('pwd', function () {
-        var strength = passwordStrengthService.measureStrength(scope.pwd);
-        scope.value = strength + '%';
-        scope.valueClass = getClass(strength);
+        scope.strength = passwordStrengthService.measureStrength(scope.pwd);
+        scope.width = scope.strength + '%';
+        scope.valueClass = getClass(scope.strength);
       });
     }
 

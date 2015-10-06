@@ -1,8 +1,6 @@
 import angular from 'angular';
 
 import NgPasswordStrenghtTemplate from './ng-password-strength.html!text';
-import PasswordStrengthService from './password-strength-service';
-
 
 class NgPasswordStrength {
   constructor(passwordStrengthService) {
