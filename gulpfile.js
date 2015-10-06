@@ -81,6 +81,7 @@ gulp.task('test:unit', function(cb) {
 });
 
 gulp.task("compile", function () {
+  gulp.src("app/scripts/*.html").pipe(gulp.dest("dist"));
   return gulp.src("app/scripts/*.js")
     .pipe(babel())
     .pipe(gulp.dest("dist"));
