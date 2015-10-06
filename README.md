@@ -32,7 +32,7 @@ See `app/index.html` in the respository.
   <div ng-password-strength="model.password"> .... </div>
   ```
 
-* Accepted additional params:
+4. Accepted additional params:
 
   * strength: value returned [0-100]
   * mode: 'foundation' or 'bootstrap'. Sets inner-class, inner-class-prefix, outter-class-prefix. No need to set one by one.  Bootstrap is default
