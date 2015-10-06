@@ -91,10 +91,18 @@ var NgPasswordStrength = (function () {
         scope.valueClass = getClass(scope.value);
       });
     }
+
+    // if you don't do this then the link won't have a "this"
+    // and thus won't have access to the accountService
+  }, {
+    key: 'compile',
+    value: function compile(element) {
+      return this.link.bind(this);
+    }
   }], [{
     key: 'directiveFactory',
-    value: function directiveFactory() {
-      NgPasswordStrength.instance = new NgPasswordStrength(new _passwordStrengthService2['default']());
+    value: function directiveFactory(passwordStrengthService) {
+      NgPasswordStrength.instance = new NgPasswordStrength(passwordStrengthService);
       return NgPasswordStrength.instance;
     }
   }]);
@@ -102,7 +110,7 @@ var NgPasswordStrength = (function () {
   return NgPasswordStrength;
 })();
 
-NgPasswordStrength.directiveFactory.$inject = [];
+NgPasswordStrength.directiveFactory.$inject = ['passwordStrengthService'];
 NgPasswordStrength.directiveName = 'ngPasswordStrength';
 
 exports['default'] = NgPasswordStrength;

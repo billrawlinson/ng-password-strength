@@ -75,14 +75,19 @@ class NgPasswordStrength {
 
   }
 
+  // if you don't do this then the link won't have a "this"
+  // and thus won't have access to the accountService
+  compile(element){
+    return this.link.bind(this);
+  }
 
-  static directiveFactory() {
-    NgPasswordStrength.instance = new NgPasswordStrength(new PasswordStrengthService());
+  static directiveFactory(passwordStrengthService) {
+    NgPasswordStrength.instance = new NgPasswordStrength(passwordStrengthService);
     return NgPasswordStrength.instance;
   }
 }
 
-NgPasswordStrength.directiveFactory.$inject = [];
+NgPasswordStrength.directiveFactory.$inject = ['passwordStrengthService'];
 NgPasswordStrength.directiveName = 'ngPasswordStrength';
 
 export default NgPasswordStrength;

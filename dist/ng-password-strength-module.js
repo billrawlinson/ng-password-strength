@@ -14,5 +14,9 @@ var _ngPasswordStrengthDirective = require('./ng-password-strength-directive');
 
 var _ngPasswordStrengthDirective2 = _interopRequireDefault(_ngPasswordStrengthDirective);
 
-exports['default'] = _angular2['default'].module('ngPasswordStrength', []).directive(_ngPasswordStrengthDirective2['default'].directiveName, _ngPasswordStrengthDirective2['default'].directiveFactory);
+var _passwordStrengthService = require('./password-strength-service');
+
+var _passwordStrengthService2 = _interopRequireDefault(_passwordStrengthService);
+
+exports['default'] = _angular2['default'].module('ngPasswordStrength', []).directive(_ngPasswordStrengthDirective2['default'].directiveName, _ngPasswordStrengthDirective2['default'].directiveFactory).service('passwordStrengthService', _passwordStrengthService2['default']);
 module.exports = exports['default'];
