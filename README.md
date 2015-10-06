@@ -34,7 +34,7 @@ Seriously, use JSPM it makes your life much easier.  This module is set up to im
   <div ng-password-strength="model.password"> .... </div>
   ```
 
-* Accepted addtional params:
+* Accepted additional params:
 
   * strength: value returned [0-100]
   * mode: 'foundation' or 'bootstrap'. Sets inner-class, inner-class-prefix, outter-class-prefix. No need to set one by one.  Bootstrap is default
@@ -72,6 +72,10 @@ Values limited to [0-100]
 Create tests
 
 ## Changelog
+
+### v.3.0.0
+* converted to ES6
+
 ### v0.2.0
 * added dependency: lodash
 * removed dependencies: bootstrap, ng-lodash
