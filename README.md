@@ -20,9 +20,7 @@ See `app/index.html` in the respository.
 
 1. JSPM install github:billrawlinson/ng-password-strength
 
-Seriously, use JSPM it makes your life much easier.  This module is set up to import lodash already so you don't need to make it globally avialable.
-
-
+  Seriously, use JSPM it makes your life much easier.  This module is set up to import lodash already so you don't need to make it globally avialable.
 
 2. Set `ng-password-strength` as a dependency in your module
   ```javascript
