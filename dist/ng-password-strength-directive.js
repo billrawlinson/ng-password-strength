@@ -64,17 +64,17 @@ var NgPasswordStrength = (function () {
           case 0:
           case 1:
             return {
-              outter: scope.outerClassPrefix + 'danger',
+              outer: scope.outerClassPrefix + 'danger',
               inner: scope.innerClassPrefix + 'danger'
             };
           case 2:
             return {
-              outter: scope.outerClassPrefix + 'warning',
+              outer: scope.outerClassPrefix + 'warning',
               inner: scope.innerClassPrefix + 'warning'
             };
           case 3:
             return {
-              outter: scope.outerClassPrefix + 'success',
+              outer: scope.outerClassPrefix + 'success',
               inner: scope.innerClassPrefix + 'success'
             };
         }
@@ -87,7 +87,7 @@ var NgPasswordStrength = (function () {
       });
 
       scope.$watch('pwd', function () {
-        scope.value = _passwordStrengthService2['default'].measureStrength(scope.pwd);
+        scope.value = _passwordStrengthService2['default'].measureStrength(scope.pwd) + '%';
         scope.valueClass = getClass(scope.value);
       });
     }
