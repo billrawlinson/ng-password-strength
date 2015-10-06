@@ -5,12 +5,12 @@ import PasswordStrengthService from './password-strength-service';
 
 
 class NgPasswordStrength {
-  constructor() {
+  constructor(passwordStrengthService) {
 
     // Set the directive properties
     this.restrict = 'A';
     this.template = NgPasswordStrenghtTemplate;
-    this.passwordStrengthService = new PasswordStrengthService();
+    this.passwordStrengthService = passwordStrengthService;
     this.scope = {
       pwd: '=ngPasswordStrength',
       value: '=strength',
@@ -25,7 +25,8 @@ class NgPasswordStrength {
   }
 
   link(scope) {
-    scope.value = scope.value || this.passwordStrengthService.measureStrength(scope.pwd);
+    let passwordStrengthService = this.passwordStrengthService;
+    scope.value = scope.value || passwordStrengthService.measureStrength(scope.pwd);
     scope.innerClassPrefix = scope.innerClassPrefix || '';
     scope.outerClassPrefix = scope.outerClassPrefix || '';
 
@@ -76,7 +77,7 @@ class NgPasswordStrength {
 
 
   static directiveFactory() {
-    NgPasswordStrength.instance = new NgPasswordStrength();
+    NgPasswordStrength.instance = new NgPasswordStrength(new PasswordStrengthService());
     return NgPasswordStrength.instance;
   }
 }
