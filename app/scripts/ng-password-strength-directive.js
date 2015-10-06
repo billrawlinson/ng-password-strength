@@ -82,7 +82,7 @@ class NgPasswordStrength {
   }
 }
 
-NgPasswordStrength.directiveFactory.$inject = ['passwordStrengthService'];
+NgPasswordStrength.directiveFactory.$inject = [];
 NgPasswordStrength.directiveName = 'ngPasswordStrength';
 
 export default NgPasswordStrength;

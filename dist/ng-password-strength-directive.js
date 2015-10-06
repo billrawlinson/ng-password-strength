@@ -102,7 +102,7 @@ var NgPasswordStrength = (function () {
   return NgPasswordStrength;
 })();
 
-NgPasswordStrength.directiveFactory.$inject = ['passwordStrengthService'];
+NgPasswordStrength.directiveFactory.$inject = [];
 NgPasswordStrength.directiveName = 'ngPasswordStrength';
 
 exports['default'] = NgPasswordStrength;
