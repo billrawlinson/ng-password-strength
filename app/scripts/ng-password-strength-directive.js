@@ -13,7 +13,7 @@ class NgPasswordStrength {
     this.passwordStrengthService = passwordStrengthService;
     this.scope = {
       pwd: '=ngPasswordStrength',
-      value: '=strength',
+      strength: '=strength',
       innerClassPrefix: '@?',
       outerClassPrefix: '@?',
       innerClass: '@?',
@@ -26,9 +26,10 @@ class NgPasswordStrength {
 
   link(scope) {
     let passwordStrengthService = this.passwordStrengthService;
-    scope.value = scope.value || passwordStrengthService.measureStrength(scope.pwd);
+    scope.strength = scope.strength || passwordStrengthService.measureStrength(scope.pwd);
     scope.innerClassPrefix = scope.innerClassPrefix || '';
     scope.outerClassPrefix = scope.outerClassPrefix || '';
+    scope.width=scope.strength + '%';
 
     let modes = {
       foundation: {
@@ -67,9 +68,9 @@ class NgPasswordStrength {
     });
 
     scope.$watch('pwd', function() {
-      let strength = passwordStrengthService.measureStrength(scope.pwd);
-      scope.value =  strength + '%';
-      scope.valueClass = getClass(strength);
+      scope.strength = passwordStrengthService.measureStrength(scope.pwd);
+      scope.width =  scope.strength + '%';
+      scope.valueClass = getClass(scope.strength);
     });
 
 

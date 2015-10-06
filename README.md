@@ -3,11 +3,13 @@
 Password strength checker wrapped in an angular directive
 Based on:
 
-*	[http://blog.brunoscopelliti.com/angularjs-directive-to-test-the-strength-of-a-password][bruno]
-*	[http://www.passwordmeter.com][meter]
+*	[Bruno Scopelliti's Blog Post on Testing Password Strength in Angular][bruno]
+*	[The Password Meter][meter]
+* [Salvador Subarrocas Initial Angular Directive Implemention][upstream]
 
   [bruno]: http://blog.brunoscopelliti.com/angularjs-directive-to-test-the-strength-of-a-password
   [meter]: http://www.passwordmeter.com
+  [upstream]: https://github.com/subarroca/ng-password-strength
 
 ## Examples
 See `app/index.html` in the respository.
@@ -16,44 +18,26 @@ See `app/index.html` in the respository.
 
 ## Usage
 
-1. Bower should add `ng-password-strength.min.js` to you main file (index.html)
+1. JSPM install github:billrawlinson/ng-password-strength
 
-  you can download this by:
-  * using bower and running `bower install ng-password-strength`
-  * downloading the [production version][min] or the [development version][max].
+Seriously, use JSPM it makes your life much easier.  This module is set up to import lodash already so you don't need to make it globally avialable.
 
-  [min]: https://raw.github.com/subarroca/ng-password-strength/master/dist/ng-password-strength.min.js
-  [max]: https://raw.github.com/subarroca/ng-password-strength/master/dist/ng-password-strength.js
 
-  In your web page:
 
-  ```html
-  <script src="ng-password-strength/dist/scripts/ng-password-strength.js"></script>
-  <script src="lodash/lodash.js"></script>
-  ```
-
-2. Bower should add `ng-password-strength` to your main file (index.html). Some of them are not automatically added so you'd better check them.
-
-  ```html
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/lodash/lodash.js"></script>
-  <script src="bower_components/ng-password-strength/dist/ng-password-strength.js"></script>
-  ```
-
-3. Set `ng-password-strength` as a dependency in your module
+2. Set `ng-password-strength` as a dependency in your module
   ```javascript
   var myapp = angular.module('myapp', ['ngPasswordStrength'])
   ```
 
-4. Add ng-password-strength directive to the wanted element, example:
+3. Add ng-password-strength directive to the wanted element, example:
   ```html
-  <div ng-password-strength="pass"> .... </div>
+  <div ng-password-strength="model.password"> .... </div>
   ```
 
 * Accepted addtional params:
 
   * strength: value returned [0-100]
-  * mode: 'foundation' or 'bootstrap'. Sets inner-class, inner-class-prefix, outter-class-prefix. No need to set one by one
+  * mode: 'foundation' or 'bootstrap'. Sets inner-class, inner-class-prefix, outter-class-prefix. No need to set one by one.  Bootstrap is default
   * inner-class: inner bar class (i.e. 'progress-bar')
   * inner-class-prefix: inner bar class prefix (i.e. 'progress-bar-' => 'progress-bar-success')
   * outter-class-prefix: root element class prefix (i.e. 'progress-bar-' => 'progress-bar-success')
