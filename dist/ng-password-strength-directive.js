@@ -87,7 +87,7 @@ var NgPasswordStrength = (function () {
       });
 
       scope.$watch('pwd', function () {
-        scope.value = _passwordStrengthService2['default'].measureStrength(scope.pwd) + '%';
+        scope.value = passwordStrengthService.measureStrength(scope.pwd) + '%';
         scope.valueClass = getClass(scope.value);
       });
     }
