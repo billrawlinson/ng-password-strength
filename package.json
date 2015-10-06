@@ -4,7 +4,7 @@
   "description": "ng-password-strength",
   "homepage": "https://github.com/subarroca/ng-password-strength",
   "bugs": "https://github.com/subarroca/ng-password-strength/issues",
-  "main": "dist/scripts/ng-password-strength.js",
+  "main": "dist/ng-password-strength-directive.js",
   "scripts": {
     "test": "gulp test:unit",
     "postinstall": "jspm install"
