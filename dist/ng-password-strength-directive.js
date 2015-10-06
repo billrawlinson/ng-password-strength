@@ -23,13 +23,13 @@ var _passwordStrengthService = require('./password-strength-service');
 var _passwordStrengthService2 = _interopRequireDefault(_passwordStrengthService);
 
 var NgPasswordStrength = (function () {
-  function NgPasswordStrength() {
+  function NgPasswordStrength(passwordStrengthService) {
     _classCallCheck(this, NgPasswordStrength);
 
     // Set the directive properties
     this.restrict = 'A';
     this.template = _ngPasswordStrengthHtmlText2['default'];
-    this.passwordStrengthService = new _passwordStrengthService2['default']();
+    this.passwordStrengthService = passwordStrengthService;
     this.scope = {
       pwd: '=ngPasswordStrength',
       value: '=strength',
@@ -45,7 +45,8 @@ var NgPasswordStrength = (function () {
   _createClass(NgPasswordStrength, [{
     key: 'link',
     value: function link(scope) {
-      scope.value = scope.value || this.passwordStrengthService.measureStrength(scope.pwd);
+      var passwordStrengthService = this.passwordStrengthService;
+      scope.value = scope.value || passwordStrengthService.measureStrength(scope.pwd);
       scope.innerClassPrefix = scope.innerClassPrefix || '';
       scope.outerClassPrefix = scope.outerClassPrefix || '';
 
@@ -93,7 +94,7 @@ var NgPasswordStrength = (function () {
   }], [{
     key: 'directiveFactory',
     value: function directiveFactory() {
-      NgPasswordStrength.instance = new NgPasswordStrength();
+      NgPasswordStrength.instance = new NgPasswordStrength(new _passwordStrengthService2['default']());
       return NgPasswordStrength.instance;
     }
   }]);
