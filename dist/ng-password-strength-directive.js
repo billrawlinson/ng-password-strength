@@ -45,6 +45,7 @@ var NgPasswordStrength = (function () {
       scope.strength = scope.strength || passwordStrengthService.measureStrength(scope.pwd);
       scope.innerClassPrefix = scope.innerClassPrefix || '';
       scope.outerClassPrefix = scope.outerClassPrefix || '';
+      scope.mode = scope.mode || 'bootstrap';
       scope.width = scope.strength + '%';
 
       var modes = {
