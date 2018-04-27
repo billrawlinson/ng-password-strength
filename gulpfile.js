@@ -13,6 +13,12 @@ var plugins = require('gulp-load-plugins')();
 var karma = require('karma').server;
 var path = require('path');
 var babel = require("gulp-babel");
+var exec = require('child_process').exec;
+var runSequence = require('run-sequence');
+var argv = require('minimist')(process.argv.slice(2));
+var COLORS = require('ansi-colors');
+var log = require('fancy-log');
+var templateUtil = require('lodash.template');
 //=============================================
 //            DECLARE VARIABLES
 //=============================================
@@ -20,8 +26,6 @@ var babel = require("gulp-babel");
 /**
  * Declare variables that are use in gulpfile.js or angular app
  */
-var log = plugins.util.log;
-var COLORS = plugins.util.colors;
 var WATCH =  false;
 var BROWSERS = 'Chrome';
 var REPORTERS = 'mocha';
@@ -79,6 +83,55 @@ gulp.task('test:unit', function(cb) {
     cb();
   });
 });
+
+
+
+gulp.task('build:jspmconfig', function (cb) {
+  exec("node ./node_modules/jspm/jspm.js config registries.github.timeouts.lookup 360", function(err, stdout, stderr) {
+    log(stdout);
+    log.error(stderr);
+    cb(err);
+  });
+});
+
+
+
+gulp.task('build:jspminstall', ['build:jspmconfig'], function (cb) {
+  exec("node ./node_modules/jspm/jspm.js install", function(err, stdout, stderr) {
+      log(stdout);
+      log.error(stderr);
+      cb(err);
+  });
+});
+
+
+
+gulp.task('build:fixjspmconfig', function (cb) {
+  exec("node ./node_modules/eslint/bin/eslint.js --config ./.eslintrc --fix ./config.js", function(err, stdout, stderr) {
+      log(stdout);
+      log.error(stderr);
+      cb(err);
+  });
+});
+
+
+
+gulp.task('build:jspm', function(cb){
+  runSequence(
+    ['build:jspminstall'],['build:fixjspmconfig'],
+    cb
+  );
+})
+
+gulp.task('install', function (cb) {
+  exec("yarn", function(err, stdout, stderr) {
+      log(stdout);
+      log.error(stderr);
+      cb(err);
+  });
+});
+
+
 
 gulp.task("compile", function () {
   gulp.src("app/scripts/*.html").pipe(gulp.dest("dist"));
