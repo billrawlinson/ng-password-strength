@@ -1,3 +1,25 @@
+
+/* global process */
+var fs = require('fs');
+var path = require('path');
+var _ = require('lodash');
+
+
+// Determine all potential paths which need to be proxied by KarmaJS
+// Replace requests to '/proxyTarget' with '/base/proxyTarget'
+var proxyTargets = fs.readdirSync('dist/').filter(function(file) {
+  return fs.statSync(path.join('dist/', file)).isDirectory();
+});
+
+var base = '/base/dist';
+var proxyValues = _.map(proxyTargets, function(proxyTarget) {
+  return base + '/' + proxyTarget + '/';
+});
+
+var proxies = _.keyBy(proxyValues, function(proxyValue) {
+  return proxyValue.replace(base, '');
+});
+
 // Karma configuration
 // Generated on Tue Jan 13 2015 13:06:52 GMT-0500 (EST)
 
@@ -5,18 +27,22 @@ module.exports = function(config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '',
+    basePath: '.',
 
+    
     // we need this to override the way base is in config.js in order for our
     // tests to load properly within Karma runner which uses base instead of /
     // as the baseURL
-    proxies: {
-      '/': '/base'
-    },
+    proxies: _.defaults({
+      '/dist/': '/base/dist/',
+      '/app/': '/base/app/',
+      '/jspm_packages/': '/base/jspm_packages/',
+      '/tests/': '/base/tests/'
+    }, proxies),
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jspm', 'mocha', 'sinon-chai'],
+    frameworks: ['jspm', 'mocha', 'should'],
 
 
     // list of files / patterns to load in the browser
@@ -26,24 +52,31 @@ module.exports = function(config) {
     //],
 
     jspm: {
-      config: 'config.js',
-      loadFiles: [ // Test Files
-        '*.test.js'
-      ],
-      serveFiles: [ // Non-test Files
-        'test-models/*.js',
-        '*.js'
-      ]
+        config: 'config.js',
+        loadFiles:  [ // Test Files
+          'tests/*'
+        ],
+        serveFiles: [ // Non-test Files
+          'dist/*',
+          'tests/*'
+        ],
+        paths: {
+          '*' : 'base/dist',
+          'dist/*': 'dist/*',
+          'tests/*': 'tests/*'
+        }
     },
 
 
     // list of files to exclude
-    exclude: [],
+    exclude: [
+    ],
 
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: {},
+    preprocessors: {
+    },
 
 
     // test results reporter to use

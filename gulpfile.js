@@ -18,7 +18,6 @@ var runSequence = require('run-sequence');
 var argv = require('minimist')(process.argv.slice(2));
 var COLORS = require('ansi-colors');
 var log = require('fancy-log');
-var templateUtil = require('lodash.template');
 //=============================================
 //            DECLARE VARIABLES
 //=============================================
@@ -26,7 +25,7 @@ var templateUtil = require('lodash.template');
 /**
  * Declare variables that are use in gulpfile.js or angular app
  */
-var WATCH =  false;
+var WATCH =  true;
 var BROWSERS = 'Chrome';
 var REPORTERS = 'mocha';
 

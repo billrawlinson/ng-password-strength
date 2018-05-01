@@ -14,11 +14,16 @@ System.config({
 
   map: {
     'angular': 'github:angular/bower-angular@1.6.10',
+    'angular-mocks': 'github:angular/bower-angular-mocks@1.6.10',
     'babel': 'npm:babel-core@5.8.38',
     'babel-runtime': 'npm:babel-runtime@5.8.38',
     'bluebird': 'npm:bluebird@3.5.1',
     'core-js': 'npm:core-js@1.2.7',
     'lodash': 'npm:lodash@4.17.10',
+    'text': 'github:systemjs/plugin-text@0.0.11',
+    'github:angular/bower-angular-mocks@1.6.10': {
+      'angular': 'github:angular/bower-angular@1.6.10'
+    },
     'github:jspm/nodelibs-assert@0.1.0': {
       'assert': 'npm:assert@1.4.1'
     },
